@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import { Switch, Route } from 'react-router-dom';
 import "../style/App.css";
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import Overview from "./Overview";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Review App</h1>
+        <Switch>
+          <Route exact path="/" component={Overview} />
+        </Switch>
       </div>
     );
   }
