@@ -1,5 +1,6 @@
 {
-  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier"],
   "env": {
     "browser": true,
     "node": true,
@@ -7,5 +8,10 @@
   },
   "rules": {
     "no-unused-vars": 1,
-  }
+  },
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+  ]
 }
