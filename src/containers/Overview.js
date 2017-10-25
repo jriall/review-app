@@ -8,7 +8,7 @@ class Overview extends Component {
   render() {
     return (
       <div className="category-overview">
-        <Navbar fixedTop>
+        <Navbar bsClass="navbar" fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#">Review App</a>

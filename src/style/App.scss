@@ -10,7 +10,19 @@
 }
 
 .category-tile {
+  cursor: pointer;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  transition: opacity 0.5s ease-in-out, font-size 0.5s ease-in-out;
+  &:hover {
+    @extend .category-tile-hover;
+  }
 }
+
+.category-tile-hover {
+  opacity: 0.8;
+  font-size: 110%;
+}
+
+
