@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from "react-router-dom";
 import "../style/App.css";
 import Overview from "./Overview";
-import AddNewItem from './AddNewItem';
+import AddNewItem from "./AddNewItem";
+import CategoryOverview from "./CategoryOverview";
+import Review from "./Review";
 
 class App extends Component {
   render() {
@@ -11,6 +13,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Overview} />
           <Route exact path="/add-new-item" component={AddNewItem} />
+          <Route path="/review:id" component={Review} />
+          <Route path="/category/:id" component={CategoryOverview} />
         </Switch>
       </div>
     );
