@@ -7,7 +7,7 @@ class Review extends Component {
     return (
       <div>
         <Link to="/">Home</Link>
-        <Back text="Back" />
+        <Back text="Back to Category" />
       </div>
     );
   }
