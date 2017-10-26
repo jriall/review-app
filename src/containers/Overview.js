@@ -23,7 +23,7 @@ class Overview extends Component {
               md={12}
               lg={4}
               className="category-tile"
-              id="book-category-tile"
+              id="books-category-tile"
               style={{ backgroundImage: `url(${bookImage})` }}
             >
               <h2 className="category-overview-header">Books</h2>
@@ -34,13 +34,13 @@ class Overview extends Component {
               md={12}
               lg={4}
               className="category-tile"
-              id="movie-category-tile"
+              id="movies-category-tile"
               style={{ backgroundImage: `url(${movieImage})` }}
             >
               <h2 className="category-overview-header">Movies</h2>
             </Col>
           </Link>
-          <Link to="/category/tv-shows">
+          <Link to="/category/tv">
             <Col
               md={12}
               lg={4}

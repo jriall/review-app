@@ -20,29 +20,29 @@ body {
   background-position: center;
   transition: opacity 0.5s ease-in-out, font-size 0.5s ease-in-out;
   &:hover {
-    @extend .category-tile-hover;
+    @extend .tile-hover;
   }
 }
 
-.category-tile-hover {
-  opacity: 0.8;
-  font-size: 110%;
-}
-
 .category-overview {
-  border: 20px solid black;
+  border: 10px solid black;
 }
 
 .review-tile {
-  background-color: grey;
+  background-color: #333333;
   color: white;
   text-align: center;
-  padding: 20px;
-  border: 20px solid black;
+  padding: 10px;
+  border: 5px solid black;
+  height: 60vh;
+  min-height: 400px;
+  &:hover {
+    @extend .tile-hover;
+  }
 }
 
 .review-tile-image {
-  max-height: 60vh;
+  height: 35vh;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -55,4 +55,9 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.tile-hover {
+  opacity: 0.8;
+  font-size: 110%;
 }

@@ -1,35 +1,45 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Image } from 'react-bootstrap';
+import { Row, Col, Image } from "react-bootstrap";
 
 import Back from "../components/BackButton";
 
-import testData from '../assets/testdata';
+import testData from "../assets/testdata";
 
-import ZeroStars from '../assets/images/stars/0-stars.png';
-import OneStar from '../assets/images/stars/1-stars.png';
-import TwoStars from '../assets/images/stars/2-stars.png';
-import ThreeStars from '../assets/images/stars/3-stars.png';
-import FourStars from '../assets/images/stars/4-stars.png';
-import FiveStars from '../assets/images/stars/5-stars.png';
+import ZeroStars from "../assets/images/stars/0-stars.png";
+import OneStar from "../assets/images/stars/1-stars.png";
+import TwoStars from "../assets/images/stars/2-stars.png";
+import ThreeStars from "../assets/images/stars/3-stars.png";
+import FourStars from "../assets/images/stars/4-stars.png";
+import FiveStars from "../assets/images/stars/5-stars.png";
 
 class CategoryOverview extends Component {
   render() {
     const categoryId = this.props.match.params.id;
-    console.log(categoryId);
 
-    const starsArray = [ZeroStars, OneStar, TwoStars, ThreeStars, FourStars, FiveStars]
+    const starsArray = [
+      ZeroStars,
+      OneStar,
+      TwoStars,
+      ThreeStars,
+      FourStars,
+      FiveStars
+    ];
 
-    const tiles = testData.map((item, index) => {
+    const tiles = testData[categoryId].map(item => {
       return (
-          <Link to="/review/:id" key={index}>
-            <Col xs={12} md={4} lg={3} className="review-tile">
-              <h2 className="review-tile-header">{item.title}</h2>
-              <Image className="review-tile-image" src={item.image} responsive />
-              <Image className="review-tile-stars" src={starsArray[item.stars]} responsive />
-            </Col>
-          </Link>
-      )
+        <Link to="/review/:id">
+          <Col xs={12} sm={6} md={3} lg={2} className="review-tile">
+            <Image className="review-tile-image" src={item.image} responsive />
+            <Image
+              className="review-tile-stars"
+              src={starsArray[item.stars]}
+              responsive
+            />
+            <h3 className="review-tile-header">{item.title}</h3>
+          </Col>
+        </Link>
+      );
     });
 
     return (
@@ -38,9 +48,7 @@ class CategoryOverview extends Component {
           <Link to="/add-new-item">Add New Item</Link>
           <Back text="Back" />
         </Row>
-        <Row>
-          {tiles}
-        </Row>
+        <Row>{tiles}</Row>
       </div>
     );
   }
