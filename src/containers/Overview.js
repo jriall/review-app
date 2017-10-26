@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { Navbar, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import CategoryOverview from "./CategoryOverview";
-
-import bookImage from "../assets/images/book-cover-photo.png";
-import tvImage from "../assets/images/tv-cover-photo.jpg";
-import movieImage from "../assets/images/movie-cover-photo.jpg";
+import bookImage from "../assets/images/covers/book-cover-photo.png";
+import tvImage from "../assets/images/covers/tv-cover-photo.jpg";
+import movieImage from "../assets/images/covers/movie-cover-photo.jpg";
 
 class Overview extends Component {
   render() {

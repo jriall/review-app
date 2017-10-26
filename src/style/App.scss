@@ -1,3 +1,7 @@
+body {
+  background-color: black;
+}
+
 .category-tile {
   text-align: center;
   height: 100vh;
@@ -25,4 +29,30 @@
   font-size: 110%;
 }
 
+.category-overview {
+  border: 20px solid black;
+}
 
+.review-tile {
+  background-color: grey;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border: 20px solid black;
+}
+
+.review-tile-image {
+  max-height: 60vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.review-tile-stars {
+  width: 70%;
+  max-width: 200px;
+  padding: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
