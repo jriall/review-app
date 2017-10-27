@@ -1,9 +1,10 @@
-@import './resets/reset';
+@import './resets/reset.scss';
 
 body {
   background-color: black;
 }
 
+//overview page
 .category-tile {
   text-align: center;
   height: 100vh;
@@ -26,6 +27,7 @@ body {
   }
 }
 
+//category overview tile
 .review-tile {
   background-color: #333333;
   color: white;
@@ -58,4 +60,14 @@ body {
 .tile-hover {
   opacity: 0.8;
   font-size: 110%;
+}
+
+//review page
+.review-image {
+  height: 70vh;
+}
+
+.review-title {
+  font-size: 200%;
+  color: white;
 }
