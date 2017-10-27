@@ -26,9 +26,11 @@ class CategoryOverview extends Component {
       FiveStars
     ];
 
-    const tiles = testData[categoryId].map(item => {
+    const categoryArray = Object.values(testData[categoryId]);
+
+    const tiles = categoryArray.map(item => {
       return (
-        <Link to="/review/:id">
+        <Link to={`/category/${categoryId}/${item.id}`} key={item.id}>
           <Col xs={12} sm={6} md={3} lg={2} className="review-tile">
             <Image className="review-tile-image" src={item.image} responsive />
             <Image
@@ -45,7 +47,7 @@ class CategoryOverview extends Component {
     return (
       <div className="category-overview">
         <Row className="category-overview-row">
-          <Link to="/add-new-item">Add New Item</Link>
+          <Link to={`/category/${categoryId}/add-new-item`}>Add New Item</Link>
           <Back text="Back" />
         </Row>
         <Row>{tiles}</Row>
