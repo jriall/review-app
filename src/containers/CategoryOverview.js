@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Image } from "react-bootstrap";
+import { Row, Col, Image, Button } from "react-bootstrap";
 
 import Back from "../components/BackButton";
 
-import dateFormatter from '../helpers/dateFormatter';
+import dateFormatter from "../helpers/dateFormatter";
 
 import testData from "../assets/testdata";
 
@@ -41,7 +41,9 @@ class CategoryOverview extends Component {
               src={starsArray[item.stars]}
               responsive
             />
-            <h3 className="review-tile-date">{dateFormatter(item.dateAdded)}</h3>
+            <h3 className="review-tile-date">
+              {dateFormatter(item.dateAdded)}
+            </h3>
           </Col>
         </Link>
       );
@@ -50,7 +52,12 @@ class CategoryOverview extends Component {
     return (
       <div className="category-overview">
         <Row className="category-overview-row">
-          <Link to={`/category/${categoryId}/add-new-item`}>Add New Item</Link>
+          <Link
+            to={`/category/${categoryId}/add-new-item`}
+            className="add-new-review-button"
+          >
+            <Button bsStyle="success">Add New Item</Button>
+          </Link>
           <Back text="Back" />
         </Row>
         <Row>{tiles}</Row>

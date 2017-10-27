@@ -46,7 +46,7 @@ class Review extends Component {
         <Link to="/" className="review">
           Home
         </Link>
-        <Back text="Back to Category" />
+        <Back text={`Back to ${category === 'tv' ? "TV" : category[0].toUpperCase() + category.slice(1)}`} />
         <h1 className="review-title">{item.title}</h1>
         <Image className="review-image" src={item.image} responsive />
         <Button

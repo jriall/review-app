@@ -1,7 +1,8 @@
-@import './resets/reset.scss';
+// @import './resets/reset.scss';
 
 body {
   background-color: black;
+  color: white;
 }
 
 //overview page
@@ -60,6 +61,10 @@ body {
 .tile-hover {
   opacity: 0.8;
   font-size: 110%;
+}
+
+.add-new-review-button {
+  color: white;
 }
 
 //review page

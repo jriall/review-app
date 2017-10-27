@@ -18,7 +18,7 @@ class AddNewItem extends Component {
     return (
       <div>
         <Link to="/">Home</Link>
-        <Back text="Back to Category" />
+        <Back text={`Back to ${category === 'tv' ? "TV" : category[0].toUpperCase() + category.slice(1)}`} />
         <h1>{`Add a new ${category === "books"
           ? "Book"
           : category === "movies" ? "Movie" : "TV Show"} Review`}</h1>
