@@ -4,6 +4,8 @@ import { Row, Col, Image } from "react-bootstrap";
 
 import Back from "../components/BackButton";
 
+import dateFormatter from '../helpers/dateFormatter';
+
 import testData from "../assets/testdata";
 
 import ZeroStars from "../assets/images/stars/0-stars.png";
@@ -33,12 +35,13 @@ class CategoryOverview extends Component {
         <Link to={`/category/${categoryId}/${item.id}`} key={item.id}>
           <Col xs={12} sm={6} md={3} lg={2} className="review-tile">
             <Image className="review-tile-image" src={item.image} responsive />
+            <h3 className="review-tile-header">{item.title}</h3>
             <Image
               className="review-tile-stars"
               src={starsArray[item.stars]}
               responsive
             />
-            <h3 className="review-tile-header">{item.title}</h3>
+            <h3 className="review-tile-date">{dateFormatter(item.dateAdded)}</h3>
           </Col>
         </Link>
       );
