@@ -47,16 +47,12 @@ class Review extends Component {
           Home
         </Link>
         <Back text={`Back to ${category === 'tv' ? "TV" : category[0].toUpperCase() + category.slice(1)}`} />
+        <Row className="review-row">
+        <Col xs={12} md={6} className="review-column">
+        <Image className="review-image center-block" src={item.image} responsive />
+        </Col>
+        <Col xsOffset={2} xs={8} mdOffset={0} md={5} className="review-column">
         <h1 className="review-title">{item.title}</h1>
-        <Image className="review-image" src={item.image} responsive />
-        <Button
-          bsSize="large"
-          bsStyle="primary"
-          href={item.link}
-          target="_blank"
-        >
-          Buy on Amazon
-        </Button>
         <h3 className="review-header">{item.reviewHeader}</h3>
         <Image
           className="review-stars"
@@ -65,6 +61,17 @@ class Review extends Component {
         />
         <p className="review-text">{item.review}</p>
         <p className="review-date">{dateFormatter(item.dateAdded)}</p>
+        <Button
+          bsSize="large"
+          bsStyle="primary"
+          href={item.link}
+          target="_blank"
+          className="amazon-link-button"
+        >
+          Buy on Amazon
+        </Button>
+        </Col>
+        </Row>
       </div>
     );
   }
