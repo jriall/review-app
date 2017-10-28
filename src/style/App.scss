@@ -2,6 +2,10 @@
 
 body {
   background-color: black;
+  // color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
   color: white;
 }
 
@@ -75,4 +79,12 @@ body {
 .review-title {
   font-size: 200%;
   color: white;
+}
+
+label {
+  color: white;
+}
+
+input, select, textarea {
+  color: black;
 }
