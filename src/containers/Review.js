@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+
 import Back from "../components/BackButton";
 import { Row, Col, Image, Button } from "react-bootstrap";
 
@@ -13,6 +15,12 @@ import FiveStars from "../assets/images/stars/5-stars.png";
 import testData from "../assets/testdata";
 
 import dateFormatter from "../helpers/dateFormatter";
+
+const mapStateToProps = function(state){
+  return {
+    reviewedItem: state,
+  }
+}
 
 class Review extends Component {
   render() {
@@ -77,4 +85,4 @@ class Review extends Component {
   }
 }
 
-export default Review;
+export default connect(mapStateToProps)(Review);

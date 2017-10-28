@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { Navbar, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import bookImage from "../assets/images/covers/book-cover-photo.png";
 import tvImage from "../assets/images/covers/tv-cover-photo.jpg";
 import movieImage from "../assets/images/covers/movie-cover-photo.jpg";
 
+const mapStateToProps = function(state){
+  return {
+    categories: state,
+  }
+}
+
 class Overview extends Component {
+
   render() {
     return (
       <div className="category-overview">
@@ -57,4 +65,4 @@ class Overview extends Component {
   }
 }
 
-export default Overview;
+export default connect(mapStateToProps)(Overview);

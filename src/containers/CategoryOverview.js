@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import { Row, Col, Image, Button } from "react-bootstrap";
 
 import Back from "../components/BackButton";
@@ -14,6 +15,12 @@ import TwoStars from "../assets/images/stars/2-stars.png";
 import ThreeStars from "../assets/images/stars/3-stars.png";
 import FourStars from "../assets/images/stars/4-stars.png";
 import FiveStars from "../assets/images/stars/5-stars.png";
+
+const mapStateToProps = function(state){
+  return {
+    categoryList: state,
+  }
+}
 
 class CategoryOverview extends Component {
   render() {
@@ -48,7 +55,6 @@ class CategoryOverview extends Component {
         </Link>
       );
     });
-
     return (
       <div className="category-overview">
         <Row className="category-overview-row">
@@ -66,4 +72,4 @@ class CategoryOverview extends Component {
   }
 }
 
-export default CategoryOverview;
+export default connect(mapStateToProps)(CategoryOverview);
