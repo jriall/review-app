@@ -41,9 +41,9 @@ class CategoryOverview extends Component {
               src={starsArray[item.stars]}
               responsive
             />
-            <h3 className="review-tile-date">
+            <p className="review-tile-date">
               {dateFormatter(item.dateAdded)}
-            </h3>
+            </p>
           </Col>
         </Link>
       );

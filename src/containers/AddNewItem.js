@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import Back from "../components/BackButton";
 
@@ -47,31 +48,45 @@ class AddNewItem extends Component {
             ? "TV"
             : category[0].toUpperCase() + category.slice(1)}`}
         />
-
+            <Row>
+            <Col xsOffset={1} xs={10} mdOffset={3} md={6}>
         <form onSubmit={this.handleSubmit}>
-          <h1>{`Add a New ${category === "books"
+         <h1 className="add-new-review-title">{`Add a New ${category === "books"
             ? "Book"
             : category === "movies" ? "Movie" : "TV Show"} Review`}</h1>
+            <Row>
           <label>
-            Name:
+          <Row>
+            Name
+          </Row>
             <input
+            className="text-input"
               type="text"
               name="title"
               value={this.state.title}
               onChange={this.handleChange}
             />
           </label>
+          </Row>
+          <Row>
           <label>
-            Image:
+          <Row>
+            Image
+            </Row>
             <input
+            className="text-input"
               type="text"
               name="image"
               value={this.state.image}
               onChange={this.handleChange}
             />
           </label>
+          </Row>
+          <Row>
           <label>
+          <Row>
             Number of Stars
+            </Row>
             <select
               name="stars"
               value={this.state.stars}
@@ -85,26 +100,39 @@ class AddNewItem extends Component {
               <option value={5}>Five Stars</option>
             </select>
           </label>
+          </Row>
+          <Row>
           <label>
-            Link:
+          <Row>
+            Link
+            </Row>
             <input
+            className="text-input"
               type="text"
               name="link"
               value={this.state.link}
               onChange={this.handleChange}
             />
           </label>
+          </Row>
+          <Row>
           <label>
-            Review:
+          <Row>
+            Review
+            </Row>
             <textarea
               name="review"
               value={this.state.image}
               onChange={this.handleChange}
             />
           </label>
-
+          </Row>
+<Row>
           <Button type="submit" bsStyle="success">Submit</Button>
+          </Row>
         </form>
+        </Col>
+        </Row>
       </div>
     );
   }
