@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { deleteReview } from "../actions/add_review";
+import { Row, Col, Image, Button } from "react-bootstrap";
 
 import Back from "../components/BackButton";
-import { Row, Col, Image, Button } from "react-bootstrap";
+
 
 import ZeroStars from "../assets/images/stars/0-stars.png";
 import OneStar from "../assets/images/stars/1-stars.png";
@@ -16,7 +17,7 @@ import FiveStars from "../assets/images/stars/5-stars.png";
 
 import dateFormatter from "../helpers/dateFormatter";
 
-const mapStateToProps = function(state) {
+function mapStateToProps(state) {
   return {
     reviewedItem: state
   };
@@ -42,14 +43,13 @@ class Review extends Component {
   }
 
   componentWillMount() {
-
     const { pathname } = this.props.location;
     if (pathname.match(/movies/g)) {
-      this.setState({ category: "movies"})
+      this.setState({ category: "movies" });
     } else if (pathname.match(/tv/g)) {
-      this.setState({ category: "tv"})
+      this.setState({ category: "tv" });
     } else if (pathname.match(/books/g)) {
-      this.setState({ category: "books"})
+      this.setState({ category: "books" });
     }
   }
 
@@ -77,7 +77,9 @@ class Review extends Component {
       FiveStars
     ];
 
-    const item = this.props.reviewedItem.reviewApp[this.state.category][reviewId];
+    const item = this.props.reviewedItem.reviewApp[this.state.category][
+      reviewId
+    ];
     return (
       <div>
         <Link to="/" className="review">
@@ -86,7 +88,8 @@ class Review extends Component {
         <Back
           text={`Back to ${this.state.category === "tv"
             ? "TV"
-            : this.state.category[0].toUpperCase() + [this.state.category].slice(1)}`}
+            : this.state.category[0].toUpperCase() +
+              this.state.category.slice(1)}`}
         />
         <Row className="review-row">
           <Col xs={12} md={6} className="review-column">

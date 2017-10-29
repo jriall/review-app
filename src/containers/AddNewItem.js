@@ -9,7 +9,7 @@ import uuidv1 from "uuid/v1";
 
 import Back from "../components/BackButton";
 
-const mapStateToProps = function(state) {
+function mapStateToProps(state) {
   return {
     reviewedItem: state
   };
@@ -18,8 +18,10 @@ const mapStateToProps = function(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-    addReview: addReview
-  }, dispatch);
+      addReview: addReview
+    },
+    dispatch
+  );
 }
 
 class AddNewItem extends Component {
@@ -32,6 +34,14 @@ class AddNewItem extends Component {
   }
 
   componentWillMount() {
+    const { pathname } = this.props.location;
+    if (pathname.match(/movies/g)) {
+      this.setState({ category: "movies" });
+    } else if (pathname.match(/tv/g)) {
+      this.setState({ category: "tv" });
+    } else if (pathname.match(/books/g)) {
+      this.setState({ category: "books" });
+    }
     this.setState({
       dateAdded: Date.now(),
       id: uuidv1()
@@ -57,8 +67,10 @@ class AddNewItem extends Component {
     const { redirect } = this.state;
 
     if (redirect) {
-       return <Redirect to={`/category/${this.state.category}/${this.state.id}`} />;
-     }
+      return (
+        <Redirect to={`/category/${this.state.category}/${this.state.id}`} />
+      );
+    }
 
     const { pathname } = this.props.location;
     let cat;
@@ -82,8 +94,7 @@ class AddNewItem extends Component {
         <Row>
           <Col xsOffset={1} xs={10} mdOffset={3} md={6}>
             <form onSubmit={this.handleSubmit}>
-              <h1 className="add-new-review-title">{`Add a New ${cat ===
-              "books"
+              <h1 className="add-new-review-title">{`Add a New ${cat === "books"
                 ? "Book"
                 : cat === "movies" ? "Movie" : "TV Show"} Review`}</h1>
               <Row>

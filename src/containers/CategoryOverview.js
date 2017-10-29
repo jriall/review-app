@@ -14,7 +14,7 @@ import ThreeStars from "../assets/images/stars/3-stars.png";
 import FourStars from "../assets/images/stars/4-stars.png";
 import FiveStars from "../assets/images/stars/5-stars.png";
 
-const mapStateToProps = function(state) {
+function mapStateToProps(state) {
   return {
     categoryList: state
   };
@@ -56,6 +56,9 @@ class CategoryOverview extends Component {
     return (
       <div className="category-overview">
         <Row className="category-overview-row">
+         <Link to="/" className="review">
+          Home
+        </Link>
           <Link
             to={`/category/${categoryId}/add-new-item`}
             className="add-new-review-button"

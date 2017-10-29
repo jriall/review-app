@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { Navbar, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import bookImage from "../assets/images/covers/book-cover-photo.png";
-import tvImage from "../assets/images/covers/tv-cover-photo.jpg";
-import movieImage from "../assets/images/covers/movie-cover-photo.jpg";
-
-const mapStateToProps = function(state){
+function mapStateToProps(state) {
   return {
-    categories: state,
-  }
+    categories: state
+  };
+}
+
+function latestCover(obj) {
+  return obj[Object.keys(obj)[Object.keys(obj).length - 1]].image;
 }
 
 class Overview extends Component {
-
   render() {
-    console.log(this.props.categories);
+    const path = this.props.categories.reviewApp;
+
     return (
       <div className="category-overview">
         <Navbar bsClass="navbar" fixedTop>
@@ -33,7 +33,7 @@ class Overview extends Component {
               lg={4}
               className="category-tile"
               id="books-category-tile"
-              style={{ backgroundImage: `url(${bookImage})` }}
+              style={{ backgroundImage: `url(${latestCover(path.books)})` }}
             >
               <h2 className="category-overview-header">Books</h2>
             </Col>
@@ -44,7 +44,7 @@ class Overview extends Component {
               lg={4}
               className="category-tile"
               id="movies-category-tile"
-              style={{ backgroundImage: `url(${movieImage})` }}
+              style={{ backgroundImage: `url(${latestCover(path.movies)})` }}
             >
               <h2 className="category-overview-header">Movies</h2>
             </Col>
@@ -55,7 +55,7 @@ class Overview extends Component {
               lg={4}
               className="category-tile"
               id="tv-category-tile"
-              style={{ backgroundImage: `url(${tvImage})` }}
+              style={{ backgroundImage: `url(${latestCover(path.tv)})` }}
             >
               <h2 className="category-overview-header">TV Shows</h2>
             </Col>
