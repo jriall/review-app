@@ -1,21 +1,23 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import addReview from '../actions/add_review';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import addReview from "../actions/add_review";
+import uuidv1 from "uuid/v1";
 
 import Back from "../components/BackButton";
 
-const mapStateToProps = function(state){
+const mapStateToProps = function(state) {
   return {
-    reviewedItem: state,
-  }
-}
+    reviewedItem: state
+  };
+};
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
+  return bindActionCreators(
+    {
     addReview: addReview
   }, dispatch);
 }
@@ -27,6 +29,13 @@ class AddNewItem extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({
+      dateAdded: Date.now(),
+      id: uuidv1()
+    });
   }
 
   handleChange(event) {
@@ -41,113 +50,130 @@ class AddNewItem extends Component {
   handleSubmit(event) {
     this.props.addReview(this.state);
     event.preventDefault();
+    this.setState({ redirect: true});
   }
 
   render() {
-    console.log(this.props)
+    const { redirect } = this.state;
+
+    if (redirect) {
+       return <Redirect to={`/category/${this.state.category}/${this.state.id}`} />;
+     }
+
     const { pathname } = this.props.location;
-    let category;
+    let cat;
 
     if (pathname.match(/movies/g)) {
-      category = "movies";
+      cat = "movies";
     } else if (pathname.match(/tv/g)) {
-      category = "tv";
+      cat = "tv";
     } else if (pathname.match(/books/g)) {
-      category = "books";
+      cat = "books";
     }
 
     return (
       <div>
         <Link to="/">Home</Link>
         <Back
-          text={`Back to ${category === "tv"
+          text={`Back to ${cat === "tv"
             ? "TV"
-            : category[0].toUpperCase() + category.slice(1)}`}
+            : cat[0].toUpperCase() + cat.slice(1)}`}
         />
-            <Row>
-            <Col xsOffset={1} xs={10} mdOffset={3} md={6}>
-        <form onSubmit={this.handleSubmit}>
-         <h1 className="add-new-review-title">{`Add a New ${category === "books"
-            ? "Book"
-            : category === "movies" ? "Movie" : "TV Show"} Review`}</h1>
-            <Row>
-          <label>
-          <Row>
-            Name
-          </Row>
-            <input
-            className="text-input"
-              type="text"
-              name="title"
-              value={this.state.title}
-              onChange={this.handleChange}
-            />
-          </label>
-          </Row>
-          <Row>
-          <label>
-          <Row>
-            Image
-            </Row>
-            <input
-            className="text-input"
-              type="text"
-              name="image"
-              value={this.state.image}
-              onChange={this.handleChange}
-            />
-          </label>
-          </Row>
-          <Row>
-          <label>
-          <Row>
-            Number of Stars
-            </Row>
-            <select
-              name="stars"
-              value={this.state.stars}
-              onChange={this.handleChange}
-            >
-              <option value={0}>Zero Stars</option>
-              <option value={1}>One Star</option>
-              <option value={2}>Two Stars</option>
-              <option value={3}>Three Stars</option>
-              <option value={4}>Four Stars</option>
-              <option value={5}>Five Stars</option>
-            </select>
-          </label>
-          </Row>
-          <Row>
-          <label>
-          <Row>
-            Link
-            </Row>
-            <input
-            className="text-input"
-              type="text"
-              name="link"
-              value={this.state.link}
-              onChange={this.handleChange}
-            />
-          </label>
-          </Row>
-          <Row>
-          <label>
-          <Row>
-            Review
-            </Row>
-            <textarea
-              name="review"
-              value={this.state.image}
-              onChange={this.handleChange}
-            />
-          </label>
-          </Row>
-<Row>
-          <Button type="submit" bsStyle="success">Submit</Button>
-          </Row>
-        </form>
-        </Col>
+        <Row>
+          <Col xsOffset={1} xs={10} mdOffset={3} md={6}>
+            <form onSubmit={this.handleSubmit}>
+              <h1 className="add-new-review-title">{`Add a New ${cat ===
+              "books"
+                ? "Book"
+                : cat === "movies" ? "Movie" : "TV Show"} Review`}</h1>
+              <Row>
+                <label>
+                  <Row>Name</Row>
+                  <input
+                    className="text-input"
+                    type="text"
+                    name="title"
+                    value={this.state.title}
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </Row>
+              <Row>
+                <label>
+                  <Row>Image</Row>
+                  <input
+                    className="text-input"
+                    type="text"
+                    name="image"
+                    value={this.state.image}
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </Row>
+              <Row>
+                <label>
+                  <Row>Number of Stars</Row>
+                  <select
+                    name="stars"
+                    value={this.state.stars}
+                    onChange={this.handleChange}
+                  >
+                    <option>Select a Rating</option>
+                    <option value={0}>Zero Stars</option>
+                    <option value={1}>One Star</option>
+                    <option value={2}>Two Stars</option>
+                    <option value={3}>Three Stars</option>
+                    <option value={4}>Four Stars</option>
+                    <option value={5}>Five Stars</option>
+                  </select>
+                </label>
+              </Row>
+
+              <Row>
+                <label>
+                  <Row>Category</Row>
+                  <select
+                    name="category"
+                    value={this.state.category}
+                    onChange={this.handleChange}
+                  >
+                    <option>Select a Category</option>
+                    <option value="books">Book</option>
+                    <option value="movies">Movie</option>
+                    <option value="tv">TV</option>
+                  </select>
+                </label>
+              </Row>
+
+              <Row>
+                <label>
+                  <Row>Link</Row>
+                  <input
+                    className="text-input"
+                    type="text"
+                    name="link"
+                    value={this.state.link}
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </Row>
+              <Row>
+                <label>
+                  <Row>Review</Row>
+                  <textarea
+                    name="review"
+                    value={this.state.review}
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </Row>
+              <Row>
+                <Button type="submit" bsStyle="success">
+                  Submit
+                </Button>
+              </Row>
+            </form>
+          </Col>
         </Row>
       </div>
     );
