@@ -34,7 +34,9 @@ function mapDispatchToProps(dispatch) {
 class Review extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      id: this.props.match.params.id
+    };
 
     this.handleDelete = this.handleDelete.bind(this);
   }
@@ -52,7 +54,7 @@ class Review extends Component {
   }
 
   handleDelete() {
-    this.props.deleteReview(this.props.match.params.id);
+    this.props.deleteReview(this.state);
     this.setState({ redirect: true });
   }
 

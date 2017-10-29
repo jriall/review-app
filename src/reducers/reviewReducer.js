@@ -10,7 +10,7 @@ function reviewReducer(state = testData, action) {
       return newStateAddition;
     case DELETE_REVIEW:
       const newStateDeletion = { ...state};
-      Object.keys(newStateDeletion.books).filter(key => key === action.payload).forEach(key => delete newStateDeletion.books[key]);
+      Object.keys(newStateDeletion[action.payload.category]).filter(key => key === action.payload.id).forEach(key => delete newStateDeletion[action.payload.category][key]);
       return newStateDeletion;
     default:
       return state;
