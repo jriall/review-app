@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
 
 import Back from "../components/BackButton";
 import { Row, Col, Image, Button } from "react-bootstrap";
@@ -12,8 +13,6 @@ import ThreeStars from "../assets/images/stars/3-stars.png";
 import FourStars from "../assets/images/stars/4-stars.png";
 import FiveStars from "../assets/images/stars/5-stars.png";
 
-import testData from "../assets/testdata";
-
 import dateFormatter from "../helpers/dateFormatter";
 
 const mapStateToProps = function(state){
@@ -22,7 +21,25 @@ const mapStateToProps = function(state){
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+    // deleteReview: deleteReview
+  }, dispatch);
+}
+
 class Review extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleDelete= this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+    this.props.deleteReview()
+  }
+
   render() {
     const reviewId = this.props.match.params.id;
 
@@ -47,8 +64,7 @@ class Review extends Component {
       FiveStars
     ];
 
-    const item = testData[category][reviewId];
-
+    const item = this.props.reviewedItem.reviewApp[category][reviewId]
     return (
       <div>
         <Link to="/" className="review">
@@ -78,6 +94,7 @@ class Review extends Component {
         >
           Buy on Amazon
         </Button>
+        <Button bsStyle="danger" bsSize="large" onClick={this.handleDelete}>Delete Review</Button>
         </Col>
         </Row>
       </div>
@@ -85,4 +102,4 @@ class Review extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Review);
+export default connect(mapStateToProps, mapDispatchToProps)(Review);

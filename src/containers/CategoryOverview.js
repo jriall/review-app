@@ -7,8 +7,6 @@ import Back from "../components/BackButton";
 
 import dateFormatter from "../helpers/dateFormatter";
 
-import testData from "../assets/testdata";
-
 import ZeroStars from "../assets/images/stars/0-stars.png";
 import OneStar from "../assets/images/stars/1-stars.png";
 import TwoStars from "../assets/images/stars/2-stars.png";
@@ -35,7 +33,7 @@ class CategoryOverview extends Component {
       FiveStars
     ];
 
-    const categoryArray = Object.values(testData[categoryId]);
+    const categoryArray = Object.values(this.props.categoryList.reviewApp[categoryId]);
 
     const tiles = categoryArray.map(item => {
       return (
