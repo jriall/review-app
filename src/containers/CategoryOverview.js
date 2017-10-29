@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { Row, Col, Image, Button } from "react-bootstrap";
 
 import Back from "../components/BackButton";
@@ -14,11 +14,11 @@ import ThreeStars from "../assets/images/stars/3-stars.png";
 import FourStars from "../assets/images/stars/4-stars.png";
 import FiveStars from "../assets/images/stars/5-stars.png";
 
-const mapStateToProps = function(state){
+const mapStateToProps = function(state) {
   return {
-    categoryList: state,
-  }
-}
+    categoryList: state
+  };
+};
 
 class CategoryOverview extends Component {
   render() {
@@ -33,7 +33,9 @@ class CategoryOverview extends Component {
       FiveStars
     ];
 
-    const categoryArray = Object.values(this.props.categoryList.reviewApp[categoryId]);
+    const categoryArray = Object.values(
+      this.props.categoryList.reviewApp[categoryId]
+    );
 
     const tiles = categoryArray.map(item => {
       return (
@@ -46,9 +48,7 @@ class CategoryOverview extends Component {
               src={starsArray[item.stars]}
               responsive
             />
-            <p className="review-tile-date">
-              {dateFormatter(item.dateAdded)}
-            </p>
+            <p className="review-tile-date">{dateFormatter(item.dateAdded)}</p>
           </Col>
         </Link>
       );

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import { bindActionCreators } from "redux";
+import { deleteReview } from "../actions/add_review";
 
 import Back from "../components/BackButton";
 import { Row, Col, Image, Button } from "react-bootstrap";
@@ -15,44 +16,54 @@ import FiveStars from "../assets/images/stars/5-stars.png";
 
 import dateFormatter from "../helpers/dateFormatter";
 
-const mapStateToProps = function(state){
+const mapStateToProps = function(state) {
   return {
-    reviewedItem: state,
-  }
-}
+    reviewedItem: state
+  };
+};
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-    // deleteReview: deleteReview
-  }, dispatch);
+      deleteReview: deleteReview
+    },
+    dispatch
+  );
 }
 
 class Review extends Component {
-
   constructor(props) {
     super(props);
+    this.state = {};
 
-    this.handleDelete= this.handleDelete.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  componentWillMount() {
+
+    const { pathname } = this.props.location;
+    if (pathname.match(/movies/g)) {
+      this.setState({ category: "movies"})
+    } else if (pathname.match(/tv/g)) {
+      this.setState({ category: "tv"})
+    } else if (pathname.match(/books/g)) {
+      this.setState({ category: "books"})
+    }
   }
 
   handleDelete() {
-    this.props.deleteReview()
+    this.props.deleteReview(this.props.match.params.id);
+    this.setState({ redirect: true });
   }
 
   render() {
+    console.log(this.props.location);
     const reviewId = this.props.match.params.id;
 
-    const { pathname } = this.props.location;
+    const { redirect } = this.state;
 
-    let category;
-
-    if (pathname.match(/movies/g)) {
-      category = "movies";
-    } else if (pathname.match(/tv/g)) {
-      category = "tv";
-    } else if (pathname.match(/books/g)) {
-      category = "books";
+    if (redirect) {
+      return <Redirect to={`/category/${this.state.category}`} />;
     }
 
     const starsArray = [
@@ -64,38 +75,54 @@ class Review extends Component {
       FiveStars
     ];
 
-    const item = this.props.reviewedItem.reviewApp[category][reviewId]
+    const item = this.props.reviewedItem.reviewApp[this.state.category][reviewId];
     return (
       <div>
         <Link to="/" className="review">
           Home
         </Link>
-        <Back text={`Back to ${category === 'tv' ? "TV" : category[0].toUpperCase() + category.slice(1)}`} />
-        <Row className="review-row">
-        <Col xs={12} md={6} className="review-column">
-        <Image className="review-image center-block" src={item.image} responsive />
-        </Col>
-        <Col xsOffset={2} xs={8} mdOffset={0} md={5} className="review-column">
-        <h1 className="review-title">{item.title}</h1>
-        <h3 className="review-header">{item.reviewHeader}</h3>
-        <Image
-          className="review-stars"
-          src={starsArray[item.stars]}
-          responsive
+        <Back
+          text={`Back to ${this.state.category === "tv"
+            ? "TV"
+            : this.state.category[0].toUpperCase() + [this.state.category].slice(1)}`}
         />
-        <p className="review-text">{item.review}</p>
-        <p className="review-date">{dateFormatter(item.dateAdded)}</p>
-        <Button
-          bsSize="large"
-          bsStyle="primary"
-          href={item.link}
-          target="_blank"
-          className="amazon-link-button"
-        >
-          Buy on Amazon
-        </Button>
-        <Button bsStyle="danger" bsSize="large" onClick={this.handleDelete}>Delete Review</Button>
-        </Col>
+        <Row className="review-row">
+          <Col xs={12} md={6} className="review-column">
+            <Image
+              className="review-image center-block"
+              src={item.image}
+              responsive
+            />
+          </Col>
+          <Col
+            xsOffset={2}
+            xs={8}
+            mdOffset={0}
+            md={5}
+            className="review-column"
+          >
+            <h1 className="review-title">{item.title}</h1>
+            <h3 className="review-header">{item.reviewHeader}</h3>
+            <Image
+              className="review-stars"
+              src={starsArray[item.stars]}
+              responsive
+            />
+            <p className="review-text">{item.review}</p>
+            <p className="review-date">{dateFormatter(item.dateAdded)}</p>
+            <Button
+              bsSize="large"
+              bsStyle="primary"
+              href={item.link}
+              target="_blank"
+              className="amazon-link-button"
+            >
+              Buy on Amazon
+            </Button>
+            <Button bsStyle="danger" bsSize="large" onClick={this.handleDelete}>
+              Delete Review
+            </Button>
+          </Col>
         </Row>
       </div>
     );

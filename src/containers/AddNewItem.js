@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import addReview from "../actions/add_review";
+import { addReview } from "../actions/add_review";
 import uuidv1 from "uuid/v1";
 
 import Back from "../components/BackButton";
@@ -50,7 +50,7 @@ class AddNewItem extends Component {
   handleSubmit(event) {
     this.props.addReview(this.state);
     event.preventDefault();
-    this.setState({ redirect: true});
+    this.setState({ redirect: true });
   }
 
   render() {
