@@ -1,8 +1,8 @@
-import testData from "../assets/testdata";
+import { combineReducers } from 'redux';
+import reviewReducer from './reviewReducer';
 
-function reviewApp(state = testData, action) {
-  //handle actions
-  return state;
-}
+const rootReducer = combineReducers({
+  reviewApp: reviewReducer,
+});
 
-export default reviewApp;
+export default rootReducer;

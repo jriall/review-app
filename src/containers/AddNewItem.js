@@ -2,8 +2,23 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import addReview from '../actions/add_review';
 
 import Back from "../components/BackButton";
+
+const mapStateToProps = function(state){
+  return {
+    reviewedItem: state,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    addReview: addReview
+  }, dispatch);
+}
 
 class AddNewItem extends Component {
   constructor(props) {
@@ -24,11 +39,12 @@ class AddNewItem extends Component {
   }
 
   handleSubmit(event) {
-    alert("A review was submitted: " + this.state);
+    this.props.addReview(this.state);
     event.preventDefault();
   }
 
   render() {
+    console.log(this.props)
     const { pathname } = this.props.location;
     let category;
 
@@ -138,4 +154,4 @@ class AddNewItem extends Component {
   }
 }
 
-export default AddNewItem;
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewItem);

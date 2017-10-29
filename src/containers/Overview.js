@@ -16,6 +16,7 @@ const mapStateToProps = function(state){
 class Overview extends Component {
 
   render() {
+    console.log(this.props.categories);
     return (
       <div className="category-overview">
         <Navbar bsClass="navbar" fixedTop>
