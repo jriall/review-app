@@ -1,9 +1,14 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const Back = ({ history, ...props }) => (
-  <Button onClick={history.goBack} bsStyle="primary">{props.text}</Button>
+const Back = ({ ...props }) => (
+  <Link to={props.link}>
+    <Button bsStyle="primary" bsSize="large" >
+      {props.text}
+    </Button>
+  </Link>
+
 );
 
-export default withRouter(Back);
+export default Back;

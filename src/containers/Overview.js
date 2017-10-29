@@ -14,6 +14,7 @@ function latestCover(obj) {
 }
 
 class Overview extends Component {
+
   render() {
     const path = this.props.categories.reviewApp;
 

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { deleteReview } from "../actions/add_review";
+import { deleteReview } from "../actions/index";
 import { Row, Col, Image, Button } from "react-bootstrap";
 
 import Back from "../components/BackButton";
-
+import HomeButton from '../components/HomeButton';
 
 import ZeroStars from "../assets/images/stars/0-stars.png";
 import OneStar from "../assets/images/stars/1-stars.png";
@@ -82,14 +82,13 @@ class Review extends Component {
     ];
     return (
       <div>
-        <Link to="/" className="review">
-          Home
-        </Link>
+        <HomeButton />
         <Back
           text={`Back to ${this.state.category === "tv"
             ? "TV"
             : this.state.category[0].toUpperCase() +
               this.state.category.slice(1)}`}
+          link={`/category/${this.state.category}`}
         />
         <Row className="review-row">
           <Col xs={12} md={6} className="review-column">

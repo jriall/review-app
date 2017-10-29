@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Row, Col, Image, Button } from "react-bootstrap";
 
-import Back from "../components/BackButton";
-
 import dateFormatter from "../helpers/dateFormatter";
+
+import HomeButton from "../components/HomeButton";
 
 import ZeroStars from "../assets/images/stars/0-stars.png";
 import OneStar from "../assets/images/stars/1-stars.png";
@@ -18,7 +18,7 @@ function mapStateToProps(state) {
   return {
     categoryList: state
   };
-};
+}
 
 class CategoryOverview extends Component {
   render() {
@@ -56,16 +56,13 @@ class CategoryOverview extends Component {
     return (
       <div className="category-overview">
         <Row className="category-overview-row">
-         <Link to="/" className="review">
-          Home
-        </Link>
+          <HomeButton />
           <Link
             to={`/category/${categoryId}/add-new-item`}
             className="add-new-review-button"
           >
-            <Button bsStyle="success">Add New Item</Button>
+            <Button bsStyle="success" bsSize="large" >Add New Item</Button>
           </Link>
-          <Back text="Back" />
         </Row>
         <Row>{tiles}</Row>
       </div>

@@ -1,5 +1,4 @@
-import { ADD_REVIEW } from "./types";
-import { DELETE_REVIEW } from "./types";
+import { ADD_REVIEW, DELETE_REVIEW } from "./types";
 
 export function addReview(review) {
   return {

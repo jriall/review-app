@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { addReview } from "../actions/add_review";
 import uuidv1 from "uuid/v1";
 
+import { addReview } from "../actions/index";
 import Back from "../components/BackButton";
+import HomeButton from "../components/HomeButton";
 
 function mapStateToProps(state) {
   return {
     reviewedItem: state
   };
-};
+}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
@@ -85,11 +86,12 @@ class AddNewItem extends Component {
 
     return (
       <div>
-        <Link to="/">Home</Link>
+        <HomeButton />
         <Back
           text={`Back to ${cat === "tv"
             ? "TV"
             : cat[0].toUpperCase() + cat.slice(1)}`}
+          link={`/category/${cat}`}
         />
         <Row>
           <Col xsOffset={1} xs={10} mdOffset={3} md={6}>

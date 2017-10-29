@@ -13,18 +13,22 @@ import CategoryOverview from "./CategoryOverview";
 import Review from "./Review";
 
 const App = ({ store }) => {
-  return (
-  <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Overview} />
-        <Route exact path="/category/*/add-new-item" component={AddNewItem} />
-        <Route path="/category/*/:id" component={Review} />
-        <Route path="/category/:id" component={CategoryOverview} />
-      </Switch>
-    </Router>
-  </Provider>
-  )
+    return (
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Overview} />
+            <Route
+              exact
+              path="/category/*/add-new-item"
+              component={AddNewItem}
+            />
+            <Route path="/category/*/:id" component={Review} />
+            <Route path="/category/:id" component={CategoryOverview} />
+          </Switch>
+        </Router>
+      </Provider>
+    );
 }
 
 App.propTypes = {
