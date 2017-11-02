@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { deleteReview } from "../actions/index";
 import { Row, Col, Image, Button } from "react-bootstrap";
@@ -59,7 +59,6 @@ class Review extends Component {
   }
 
   render() {
-    console.log(this.props.location);
     const reviewId = this.props.match.params.id;
 
     const { redirect } = this.state;
@@ -113,7 +112,8 @@ class Review extends Component {
               responsive
             />
             <p className="review-text">{item.review}</p>
-            <p className="review-date">{dateFormatter(item.dateAdded)}</p>
+            <p className="review-date">{dateFormatter(item.dateAdded, "added")}</p>
+            <p className="edit-date">{dateFormatter(item.dateEdited, "edited")}</p>
             <Button
               bsSize="large"
               bsStyle="primary"
@@ -126,6 +126,12 @@ class Review extends Component {
             <Button bsStyle="danger" bsSize="large" onClick={this.handleDelete}>
               Delete Review
             </Button>
+            <Link
+            to={`/category/${this.state.category}/edit-item/${reviewId}`}
+            className="edit-review-button"
+          >
+            <Button bsStyle="success" bsSize="large">Edit Item</Button>
+          </Link>
           </Col>
         </Row>
       </div>

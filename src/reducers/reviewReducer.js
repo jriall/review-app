@@ -1,6 +1,7 @@
 
 import { ADD_REVIEW } from "../actions/types";
 import { DELETE_REVIEW } from "../actions/types";
+import { EDIT_REVIEW } from "../actions/types";
 import testData from "../assets/testdata";
 
 function reviewReducer(state = testData, action) {
@@ -16,6 +17,10 @@ function reviewReducer(state = testData, action) {
         .filter(key => key === action.payload.id)
         .forEach(key => delete newStateDeletion[action.payload.category][key]);
       return newStateDeletion;
+    case EDIT_REVIEW:
+        const newStateEdited = { ...state };
+        newStateEdited[action.payload.category][action.payload.id] = action.payload;
+        return newStateEdited;
     default:
       return state;
   }

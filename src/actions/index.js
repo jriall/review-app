@@ -1,4 +1,4 @@
-import { ADD_REVIEW, DELETE_REVIEW } from "./types";
+import { ADD_REVIEW, DELETE_REVIEW, EDIT_REVIEW } from "./types";
 
 export function addReview(review) {
   return {
@@ -12,4 +12,11 @@ export function deleteReview(review) {
     type: DELETE_REVIEW,
     payload: review
   };
+}
+
+export function editReview(review) {
+  return {
+    type: EDIT_REVIEW,
+    payload: review
+  }
 }
